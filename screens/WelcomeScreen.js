@@ -5,7 +5,7 @@ import Slides from '../components/Slides';
 const SLIDE_DATA = [
     { text: 'Welcome to JobApp', color: '#03A9F4'},
     { text: 'Use it to Job', color: '#009688'},
-    { text: 'Set your location, then swipe away', color: '#03A9F4'}
+    { text: 'Set your location, then swipe away', color: '#03A9F4'},
 ];
 
 class WelcomeScreen extends Component {

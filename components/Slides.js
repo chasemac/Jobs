@@ -32,7 +32,6 @@ class Slides extends Component {
     }
     render() {
         return (
-
                 <ScrollView
                     horizontal
                     style={{ flex: 1}}

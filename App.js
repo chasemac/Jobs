@@ -13,7 +13,6 @@ import ReviewScreen from './screens/ReviewScreen';
 
 
 const RootStack = TabNavigator({
-
   welcome: { screen: WelcomeScreen },
   auth: { screen: AuthScreen },
   main: {
@@ -21,57 +20,28 @@ const RootStack = TabNavigator({
       map: { screen: MapScreen },
       deck: { screen: DeckScreen },
       review: {
-                    screen: StackNavigator({
+                      screen: StackNavigator({
                       review: { screen: ReviewScreen },
                       settings: { screen: SettingsScreen }
-                    })
-                  }
+                      })
+              }
     })
   }
 });
 
 export default class App extends React.Component {
-
-
   render() {
-    // const MainNavigator = TabNavigator({
-    //   welcome: { screen: WelcomeScreen },
-    //   auth: { screen: AuthScreen }
-    // });
-    // console.log(MainNavigator)
-
     return <Provider store={store}>
             <RootStack/>
           </Provider> ;
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-// export default TabNavigator({
-
-//       welcome: { screen: WelcomeScreen },
-//       auth: { screen: AuthScreen },
-//       main: {
-//         screen: TabNavigator({
-//           map: { screen: MapScreen },
-//           deck: { screen: DeckScreen },
-//           review: {
-//             screen: StackNavigator({
-//               review: { screen: ReviewScreen },
-//               settings: { screen: SettingsScreen }
-//             })
-//           }
-//         })
-//       }
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
 // });
-
-//   <MainNavigator style={{outline: '2px solid red'}}/>
-// app: { screen: App },
