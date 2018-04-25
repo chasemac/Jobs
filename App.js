@@ -1,13 +1,44 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+
+import AuthScreen from './screens/AuthScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
+import MapScreen from './screens/MapScreen';
+import DeckScreen from './screens/DeckScreen';
+import SettingsScreen from './screens/SettingsScreen';
+import ReviewScreen from './screens/ReviewScreen';
+
+
+const RootStack = TabNavigator({
+
+  welcome: { screen: WelcomeScreen },
+  auth: { screen: AuthScreen },
+  main: {
+    screen: TabNavigator({
+      map: { screen: MapScreen },
+      deck: { screen: DeckScreen },
+      review: {
+                    screen: StackNavigator({
+                      review: { screen: ReviewScreen },
+                      settings: { screen: SettingsScreen }
+                    })
+                  }
+    })
+  }
+});
 
 export default class App extends React.Component {
+
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+    // const MainNavigator = TabNavigator({
+    //   welcome: { screen: WelcomeScreen },
+    //   auth: { screen: AuthScreen }
+    // });
+    // console.log(MainNavigator)
+
+    return <RootStack/>;
   }
 }
 
@@ -19,3 +50,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// export default TabNavigator({
+
+//       welcome: { screen: WelcomeScreen },
+//       auth: { screen: AuthScreen },
+//       main: {
+//         screen: TabNavigator({
+//           map: { screen: MapScreen },
+//           deck: { screen: DeckScreen },
+//           review: {
+//             screen: StackNavigator({
+//               review: { screen: ReviewScreen },
+//               settings: { screen: SettingsScreen }
+//             })
+//           }
+//         })
+//       }
+// });
+
+//   <MainNavigator style={{outline: '2px solid red'}}/>
+// app: { screen: App },
