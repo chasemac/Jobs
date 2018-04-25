@@ -20,13 +20,18 @@ const RootStack = TabNavigator({
       map: { screen: MapScreen },
       deck: { screen: DeckScreen },
       review: {
-                      screen: StackNavigator({
-                      review: { screen: ReviewScreen },
-                      settings: { screen: SettingsScreen }
-                      })
+                screen: StackNavigator({
+                review: { screen: ReviewScreen },
+                settings: { screen: SettingsScreen }
+                })
               }
     })
   }
+}, {
+  navigationOptions: {
+    tabBarVisible: false
+}
+
 });
 
 export default class App extends React.Component {
@@ -36,6 +41,7 @@ export default class App extends React.Component {
           </Provider> ;
   }
 }
+
 
 // const styles = StyleSheet.create({
 //   container: {
