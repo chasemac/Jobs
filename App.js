@@ -25,13 +25,12 @@ const RootStack = TabNavigator({
                 settings: { screen: SettingsScreen }
                 })
               }
-    })
+      })
+    }
+  }, {
+    navigationOptions: {
+      tabBarVisible: false
   }
-}, {
-  navigationOptions: {
-    tabBarVisible: false
-}
-
 });
 
 export default class App extends React.Component {
