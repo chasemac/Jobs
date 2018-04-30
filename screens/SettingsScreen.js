@@ -18,3 +18,4 @@ class SettingsScreen extends Component {
 }
 
 export default SettingsScreen;
+

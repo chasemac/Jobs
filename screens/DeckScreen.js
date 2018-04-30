@@ -4,14 +4,20 @@ import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { Card, Button } from 'react-native-elements';
 import Swipe from '../components/Swipe';
+import * as actions from '../actions';
+
+
+// NEED TO Get LATIDUE AND LONGITUDE from job location
 
 class DeckScreen extends Component {
-    //(?<=<p>)(.*)(?=<\/\p>)
-
-
     renderCard(job) {
+        console.log('================latitude===BELOW=================');
+        console.log(job.lat);
+        console.log('================latitude==ABOVE==================');
+        console.log('================Region===BELOW=================');
+        console.log(job.region);
+        console.log('================Region==ABOVE==================');
         const doStuff = (job) => {
-            
             const desc = job.description.substring(0, 900);
             const reg = /<p>(.*?)<\/p>/g;
             const pMatch = reg.exec(desc);
@@ -30,9 +36,33 @@ class DeckScreen extends Component {
             }
             return pMatch[1];
         }
+        const initialRegion = {
+
+            longitude: 37.78825,
+            latitude: -122.4324,
+            longitudeDelta: 0.044,
+            latitudeDelta: 0.02,
+        }
+
+
 
         return (
             <Card title={job.title}>
+            <View style={{ height: 300 }}>
+                <MapView
+                    scrollEnabled={false}
+                    style={{ flex: 1 }}
+                    cacheEnabled={false}
+                    initialRegion={{
+                        latitude: 37.78825,
+                        longitude: -122.4324,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,}}
+                >
+
+                </MapView>
+            </View>
+            
                 <View style={styles.detailWrapper}>
                     <Text>{job.company}</Text>
                     <Text>{job.created_at.substring(0, 10)}</Text>
@@ -41,13 +71,23 @@ class DeckScreen extends Component {
             </Card>
         );
     }
+
+    renderNoMoreCards() {
+        return (
+            <Card title="No more jobs">
+
+            </Card>
+        )
+    }
     render() {
         return (
             <SafeAreaView>
                 <Swipe 
                     data={this.props.jobs}
                     renderCard={this.renderCard}
+                    renderNoMoreCards={this.renderNoMoreCards}
                     onSwipeRight={job => this.props.likeJob(job)}
+                    keyProp="id"
                 />
             </SafeAreaView>
         );
@@ -66,4 +106,4 @@ function mapStateToProps({jobs}) {
     return { jobs: jobs };
 }
 
-export default connect(mapStateToProps)(DeckScreen);
+export default connect(mapStateToProps, actions)(DeckScreen);
