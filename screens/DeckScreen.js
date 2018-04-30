@@ -47,6 +47,7 @@ class DeckScreen extends Component {
                 <Swipe 
                     data={this.props.jobs}
                     renderCard={this.renderCard}
+                    onSwipeRight={job => this.props.likeJob(job)}
                 />
             </SafeAreaView>
         );
