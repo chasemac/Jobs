@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
-
+import { PersistGate } from 'redux-persist/es/integration/react';
+import configureStore from './store';
 import store from './store';
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -11,7 +12,8 @@ import DeckScreen from './screens/DeckScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ReviewScreen from './screens/ReviewScreen';
 
-const RootStack = TabNavigator({
+const MainNavigator = TabNavigator({
+  
   welcome: { screen: WelcomeScreen },
   auth: { screen: AuthScreen },
   main: {
@@ -38,8 +40,12 @@ const RootStack = TabNavigator({
 
 export default class App extends React.Component {
   render() {
+    const { persistor, store } = configureStore();
+
     return <Provider store={store}>
-            <RootStack/>
+            <PersistGate persistor={persistor}>
+             <MainNavigator/>
+            </PersistGate>
           </Provider> ;
   }
 }
