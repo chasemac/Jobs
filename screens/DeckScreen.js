@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
 import Swipe from '../components/Swipe';
 import * as actions from '../actions';
 
@@ -10,6 +10,14 @@ import * as actions from '../actions';
 // NEED TO Get LATIDUE AND LONGITUDE from job location
 
 class DeckScreen extends Component {
+    static navigationOptions = ({ navigation }) => {
+        return {
+          title: 'Jobs',
+          tabBarIcon: ({ tintColor }) =>
+            <Icon name="description" size={30} color={tintColor} />
+        };
+      };
+
     renderCard(job) {
         console.log('================latitude===BELOW=================');
         console.log(job.lat);

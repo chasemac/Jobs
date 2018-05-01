@@ -11,7 +11,6 @@ import DeckScreen from './screens/DeckScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ReviewScreen from './screens/ReviewScreen';
 
-
 const RootStack = TabNavigator({
   welcome: { screen: WelcomeScreen },
   auth: { screen: AuthScreen },
@@ -25,6 +24,10 @@ const RootStack = TabNavigator({
                 settings: { screen: SettingsScreen }
                 })
               }
+      }, {
+        tabBarOptions: {
+          labelStyle: { fontSize: 12 }
+        }
       })
     }
   }, {

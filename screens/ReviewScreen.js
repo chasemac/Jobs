@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Linking,  } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import { Button, Card, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 //import { ScrollView } from 'react-native-gesture-handler';
@@ -19,6 +19,9 @@ class ReviewScreen extends Component {
                   backgroundColor="rgba(0,0,0,0)"
                 />
               ),
+            headerTitle: 'Review',
+              tabBarIcon: ({ tintColor }) =>
+                <Icon name="favorite" size={30} color={tintColor} />
         }
     }
 
