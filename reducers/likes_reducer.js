@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import {
     LIKE_JOB
+    LIKE_JOB,
 } from '../actions/types';
 
 export default function(state = [], action) {

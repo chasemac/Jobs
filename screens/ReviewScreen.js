@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, ScrollView, Linking,  } from 'react-native';
+import { Button, Card } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { MapView } from 'expo';
+//import { ScrollView } from 'react-native-gesture-handler';
 
 
 class ReviewScreen extends Component {
@@ -24,19 +27,71 @@ class ReviewScreen extends Component {
         console.log('weeeeee')
     }
 
+
+
+    renderLikedJobs() {
+        return this.props.likedJobs.map(job => {
+            const { company, created_at, url, title } = job;
+            const initialRegion = {
+                longitude: 37.78825,
+                latitude: -122.4324,
+                longitudeDelta: 0.044,
+                latitudeDelta: 0.02,
+            }
+            return (
+                
+                <Card key={job.id} title={title}>
+                    <View style={{ height: 200 }}>
+                        <MapView
+                        scrollEnabled={false}
+                        style={{ flex: 1 }}
+                        cacheEnabled={false}
+                        initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,}}
+                        >
+                        </MapView>
+                        <View style={styles.detailWrapper}>
+                            <Text style={styles.italics}>{company}</Text>
+                            <Text style={styles.italics}>{created_at.substring(0, 10)}</Text>
+                        </View>
+                        <Button
+                        title="Apply Now!"
+                        backgroundColor="#03A9F4"
+                        onPress={() => Linking.openURL(url)}
+                    />
+                    </View>
+
+                </Card>
+            );
+        });
+    }
+
     render() {
         return (
-            <View>
-                <Text>1ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>12ReviewScreen</Text>
-            </View>
+            <ScrollView>
+                {this.renderLikedJobs()}
+            </ScrollView>
         );
     }
 }
 
-export default ReviewScreen;
+const styles= {
+    detailWrapper: {
+        marginTop: 10,
+        marginBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    italics: {
+        fontStyle: 'italic',
+    }
+}
+
+function mapStateToProps(state) {
+    return { likedJobs: state.likedJobs };
+}
+
+export default connect(mapStateToProps)(ReviewScreen);

@@ -102,7 +102,7 @@ const styles = {
     }
 };
 
-function mapStateToProps({jobs}) {
+function mapStateToProps({ jobs }) {
     return { jobs: jobs };
 }
 
