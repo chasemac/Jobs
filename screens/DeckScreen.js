@@ -18,6 +18,8 @@ class DeckScreen extends Component {
         };
       };
 
+      
+
     renderCard(job) {
         console.log('================latitude===BELOW=================');
         console.log(job.lat);

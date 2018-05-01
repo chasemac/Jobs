@@ -13,14 +13,31 @@ const SLIDE_DATA = [
 class WelcomeScreen extends Component {
     state = { token: null }
 
-    async componentWillMount() {
- //       AsyncStorage.removeItem('fb_token');
-        let token = await AsyncStorage.getItem('fb_token');
+    tokenVar = false;
+    tokenStuff = '';
+     async componentWillMount() {
+         console.log('====================================');
+         console.log("here?");
+         console.log('====================================');
 
+        // await AsyncStorage.removeItem('fb_token', (data) => {
+        //     console.log(data);
+        //     console.log(AsyncStorage.getItem('fb_token'));
+        // });
+
+        const token = await AsyncStorage.getItem('fb_token');
+        console.log('====================================');
+        console.log(token);
+        console.log('====================================');
         if (token) {
             this.props.navigation.navigate('map');
+            this.tokenVar = true;
             this.setState({ token });
+            console.log('====================================');
+            console.log("here2");
+            console.log('====================================');
         } else {
+            this.tokenVar = false;
             this.setState({ token: false });
         }
     }
@@ -30,6 +47,19 @@ class WelcomeScreen extends Component {
     }
 
     render() {
+        console.log('====================================');
+        console.log("rendering!!!");
+        console.log('====================================');
+        // if (this.tokenVar) {
+        //     console.log('====================================');
+        //     console.log("I am here");
+        //     console.log('====================================');
+        //     return <AppLoading />;
+        // }
+        console.log('====================================');
+        console.log("DONE rendering!!!");
+        console.log('====================================');
+
         if (_.isNull(this.state.token)) {
             return <AppLoading />;
         }
